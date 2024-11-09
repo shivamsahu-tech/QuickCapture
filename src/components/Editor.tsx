@@ -16,16 +16,13 @@ export default function Editor ({isIntercepting = false, content} : {
     const editorRef = useRef<HTMLDivElement | null>(null);
     const quillRef = useRef<Quill | null>(null);
     const router = useRouter();
-
-
     const {Note, setNote} = useNote();
+    const noteRef = useRef(Note);
 
-    
-
-   
-  
-  
-   
+    useEffect(() => {
+        noteRef.current = Note;
+    }, [Note]);
+ 
     useEffect(() => {
         if (editorRef.current) { 
             quillRef.current = new Quill(editorRef.current, {
@@ -43,16 +40,17 @@ export default function Editor ({isIntercepting = false, content} : {
 
             quillRef.current.on('text-change', () => {
                 setNote({
-                    ...Note,
+                    ...noteRef.current,
                     text: quillRef.current?.root.innerHTML || ""
                 });
             });
         }
     }, []);
 
+
     useEffect(() => {
         localStorage.setItem("cameFromEditor", "true");
-      }, []);
+    }, []);
 
     
     const handleOpenChange = () => {
@@ -60,22 +58,49 @@ export default function Editor ({isIntercepting = false, content} : {
     }
 
     return (
-       <div className={`w-screen h-screen  ${isIntercepting ? "" : 'background'} `} onClick={handleOpenChange} >
-            <div className='w-full h-full flex bg-[#0000007d]' >
-                <div className='text-editor-container' style={{backgroundColor: `${Note.color || "white"}`}} onClick={(e) => e.stopPropagation()}  >
-                    <div className='flex relative flex-col  ' >
-                        <input type="text" placeholder='title...' value={Note.title} onChange={(e) => {setNote({...Note, title:e.target.value})}} className='title-input w-full  border-2 border-black  sdfsd bg-red-700 ' spellCheck={false}  />
-                        <select name="" id="" value={Note.type} onChange={(e) => {setNote({...Note, type:e.target.value})}} className='border-2 border-black absolute right-0'>
-                            <option value="type">Type</option>
-                            <option value="star">Starred</option>
-                            <option value="imp">Important</option>
-                            <option value="gen">General</option>
-                        </select>
-                    </div>
-                    <div ref={editorRef} style={{width: '100%' }} spellCheck={false} />
-                </div>
+        <div className={`w-screen h-screen ${isIntercepting ? "" : 'background'}`} onClick={handleOpenChange}>
+        <div className="w-full h-full flex bg-[#0000007d]">
+            
+            <div
+                className="text-editor-container relative"
+                style={{ backgroundColor: `${Note.color || "white"}` }}
+                onClick={(e) => e.stopPropagation()} // Prevent click event propagation to parent
+            >
+    
+                {/* Select Dropdown */}
+                <select
+                    name=""
+                    id=""
+                    value={Note.type}
+                    onChange={(e) => { setNote({ ...Note, type: e.target.value }) }}
+                    className="text-black absolute  top-[62px] right-0 font-semibold pr-[-10px] px-3 -p py-1 rounded-md appearance-none"
+                >
+                    <option value="All">All</option>
+                    <option value="General">Gen</option>
+                    <option value="Important">Imp</option>
+                    <option value="Starred">Star</option>
+                </select>
+    
+                {/* Title Input */}
+                <input
+                    type="text"
+                    placeholder="title..."
+                    value={Note.title}
+                    onChange={(e) => { setNote({ ...Note, title: e.target.value }) }}
+                    className="title-input w-full p-3 rounded-md focus:outline-none "
+                    spellCheck={false}
+                />
+    
+                {/* Editor */}
+                <div
+                    ref={editorRef}
+                    style={{ width: '100%' }}
+                    spellCheck={false}
+                />
             </div>
-       </div>
+        </div>
+    </div>
+    
     );
 };
 

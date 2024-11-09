@@ -1,17 +1,27 @@
-.title-input{
+.title-input, select{
     text-align: center;
     font-size: 1.5rem;
     padding: 0.5rem;
-
-
-    
+    background-color: transparent;
+    border: none;
 }
+
+select{
+    font-size: 0.8rem;
+
+}
+
+select:focus {
+    outline: none; 
+    box-shadow: none; 
+  }
+
 .title-input:focus{
     outline: none;
 }
 
 .title-input::placeholder{
-    color: rgba(148, 139, 139, 0.458);
+    color: rgba(0, 0, 0, 0.458);
 }
 
 body{

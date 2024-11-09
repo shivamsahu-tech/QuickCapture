@@ -31,7 +31,6 @@ function Create() {
     return matteColors[randomIndex];
   }
   
-  console.log(getRandomMatteColor());
   const id = nanoid();
   const router = useRouter();
   const {setNote} = useNote();

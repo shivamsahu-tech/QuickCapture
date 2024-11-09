@@ -4,9 +4,9 @@ import NoteCards from "@/app/@modal/@noteCards/page"
 import { Note } from "c:/Users/91854/Desktop/quickcapture/src/types/Notes";
 import { useNote } from "@/context/NoteContext";
 
-export default function Notes(){
+export default function NotesPage(){
     const [width, setWidth] = useState(window.innerWidth)
-    const {Notes} = useNote();
+    const {Notes, type} = useNote();
     window.addEventListener('resize', () => {
         if(width > 1220) setCols(4);
         else if(width > 720) setCols(3);
@@ -16,8 +16,10 @@ export default function Notes(){
 
     const [cols, setCols] = useState(width > 1220 ? 4 : width > 720 ? 3 : 2);
     const colBoxes = [];
+    const arr = type == "All" ?  Notes : Notes.filter(note => note.type == type)
+    console.log(arr)
     for(let i = 0; i < cols; i++) {
-        const array = Notes.filter((_, idx) => {
+        const array = arr.filter((_, idx) => {
             return idx % cols === i; 
         });
         colBoxes.push(<Boxes key={i} notesArray={array} />);
