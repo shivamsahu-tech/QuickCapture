@@ -1,0 +1,68 @@
+.title-input{
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+
+
+    
+}
+.title-input:focus{
+    outline: none;
+}
+
+.title-input::placeholder{
+    color: rgba(148, 139, 139, 0.458);
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.text-editor-container {
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;                    
+    border-bottom-right-radius: 0px;                    
+    width: 45%;
+    height: 95vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 500px) {
+    .text-editor-container{
+        height: 80vh;
+        margin-top: 50px;
+    }
+}
+
+@media (max-width:1250px) {
+    .text-editor-container{
+        width: 80%;
+    }
+}
+
+.background{
+    background-image: url('https://static.vecteezy.com/system/resources/previews/006/852/804/original/abstract-blue-background-simple-design-for-your-website-free-vector.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+.ql-editor{
+    font-size: 1rem;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+}
+
+.ql-toolbar{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+

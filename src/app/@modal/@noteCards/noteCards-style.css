@@ -1,0 +1,13 @@
+ol {
+    list-style-type: disc; /* Use disc for bullet points */
+    padding-left: 20px;    /* Indent the list */
+}
+
+ul {
+    list-style-type:decimal; /* Use disc for bullet points */
+    padding-left: 20px;    /* Indent the list */
+}
+
+li {
+    margin-bottom: 5px;     /* Space between list items */
+}
