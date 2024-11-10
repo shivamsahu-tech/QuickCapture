@@ -12,7 +12,6 @@ export function middleware(request: Request) {
     return NextResponse.redirect(new URL('/sign-up', request.url));
   }
 
-  // Continue with the request if the accessToken is found
   return NextResponse.next();
 }
 
