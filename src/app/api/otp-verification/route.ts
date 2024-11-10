@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
-
+    console.log("REachecd till here", accessToken)
     if (!accessToken) {
         return new Response(
         JSON.stringify({
@@ -43,6 +43,8 @@ export async function POST(request: Request) {
     );
 
     const user = result.rows[0];
+
+    
     
     
     if (!user) {
@@ -56,6 +58,8 @@ export async function POST(request: Request) {
         }
         );
     }
+
+   
 
     const expiresAt = new Date(user.expires_at).getTime(); 
     const currentTime = Date.now();
@@ -86,6 +90,7 @@ export async function POST(request: Request) {
         );
     }
     console.log("user  : ", user)
+    
 
     if (user.isVerified) {
         return new Response(
@@ -100,6 +105,7 @@ export async function POST(request: Request) {
 
     }
 
+   
     
     await pool.query(
         `UPDATE users SET isVerified = $1 WHERE id = $2`,

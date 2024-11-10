@@ -2,7 +2,7 @@ import pool from "@/db/db";
 import { verifyAccessToken } from "@/utils/jwt";
 import { cookies } from "next/headers";
 
-export async function GET(request: Request) {
+export async function GET() {
 
     try {
         const cookieStore = cookies();

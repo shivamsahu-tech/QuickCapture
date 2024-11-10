@@ -4,7 +4,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-function page() {
+export default function Page()  {
 
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isPasswordSame, setIsPasswordSame] = useState(true);
@@ -134,7 +134,7 @@ function page() {
   )
 }
 
-export default page
+
 
 
 

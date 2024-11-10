@@ -7,7 +7,7 @@ import NotesPage from "./(dashboard)/@notes/page";
 import Create from "./(dashboard)/@createNew/page"
 import {  useEffect, useState } from "react";
 import { useNote } from "@/context/NoteContext";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 
 
@@ -41,6 +41,7 @@ export default function Home() {
         });
       }
     } catch (error) {
+      console.error("Error : ", error)
       toast({
         variant: 'destructive',
         title: "Error",

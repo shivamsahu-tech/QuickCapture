@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css'; 
 import './EditorStyle.css'
@@ -9,7 +9,7 @@ import { Note } from '@/types/Notes';
 import { useRouter} from 'next/navigation';
 import { useNote } from '@/context/NoteContext';
 
-export default function Editor ({isIntercepting = false, content} : {
+export default function Editor ({isIntercepting = false} : {
     isIntercepting: boolean,
     content: Note
 })  {

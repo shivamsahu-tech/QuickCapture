@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React from "react";
 
 export default function Dates() {
@@ -6,7 +7,7 @@ export default function Dates() {
        <div className=" w-full flex justify-center py-2 gap-3 overflow-hidden" >
         {
             dates.map((obj) => (
-                <DateBox day={obj.day} date={obj.date} month={obj.month} isToday={obj.isToday} />
+                <DateBox key={nanoid()} day={obj.day} date={obj.date} month={obj.month} isToday={obj.isToday} />
             ))
         }  
        </div>

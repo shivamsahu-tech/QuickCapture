@@ -3,6 +3,7 @@ import { useState } from "react";
 import NoteCards from "@/app/@modal/@noteCards/page"
 import { Note } from "c:/Users/91854/Desktop/quickcapture/src/types/Notes";
 import { useNote } from "@/context/NoteContext";
+import { nanoid } from "nanoid";
 
 export default function NotesPage(){
     const [width, setWidth] = useState(window.innerWidth)
@@ -16,10 +17,10 @@ export default function NotesPage(){
 
     const [cols, setCols] = useState(width > 1220 ? 4 : width > 720 ? 3 : 2);
     const colBoxes = [];
-    const arr = type == "All" ?  Notes : Notes.filter(note => note.type == type)
+    const arr = type == "All" ?  Notes : Notes?.filter(note => note.type == type)
     console.log(arr)
     for(let i = 0; i < cols; i++) {
-        const array = arr.filter((_, idx) => {
+        const array = arr?.filter((_, idx) => {
             return idx % cols === i; 
         });
         colBoxes.push(<Boxes key={i} notesArray={array} />);
@@ -40,8 +41,8 @@ const Boxes = ({notesArray} : {notesArray: Note[]}) => {
     return (
         <div>
             {
-                notesArray.map((obj) => (
-                    <NoteCards content={obj} />
+                notesArray?.map((obj) => (
+                    <NoteCards key={nanoid()} content={obj} />
                 ))
             }
         </div>

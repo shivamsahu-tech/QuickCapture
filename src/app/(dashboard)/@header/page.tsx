@@ -38,6 +38,7 @@ export default function Header() {
                 });
             }
         } catch (error) {
+            console.error("Error in send OTP : ", error)
             toast({
                 variant: "destructive",
                 title: "Something went wrong!!",
@@ -82,7 +83,6 @@ export default function Header() {
             ) {
                 setHidden(true);
             }
-            console.log("mouse-clicked");
         };
 
         document.addEventListener("mousedown", handleClickOutside);

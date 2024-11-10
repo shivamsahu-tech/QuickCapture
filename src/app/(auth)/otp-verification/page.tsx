@@ -4,7 +4,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
-function page() {
+export default function Page()  {
 
   const [otp, setOtp] = useState("");
   const [isLoading, setIsLoading]  = useState(false);
@@ -21,6 +21,7 @@ function page() {
         },
         body: JSON.stringify({ otp })
       })
+      console.log("Response : ", response)
       if(response.ok){
         toast({
           title: "Verified",
@@ -82,4 +83,4 @@ function page() {
   )
 }
 
-export default page
+

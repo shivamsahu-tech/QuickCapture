@@ -1,14 +1,12 @@
 'use client'
 import {Note} from "@/types/Notes"
-import Link from "next/link";
 import DOMPurify from "dompurify"
 import "./noteCards-style.css"
 import { useNote } from "@/context/NoteContext";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useToast } from "@/hooks/use-toast";
-import { MouseEvent } from "react";
 
 
 export default function NoteCards({content} : {content: Note}){

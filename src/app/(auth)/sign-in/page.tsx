@@ -4,7 +4,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
-function page() {
+export default function Page()  {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -109,4 +109,3 @@ return (
   )
 }
 
-export default page

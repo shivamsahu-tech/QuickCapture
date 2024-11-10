@@ -2,7 +2,7 @@ import pool from "@/db/db";
 import { verifyAccessToken } from "@/utils/jwt";
 import { cookies } from "next/headers";
 
-export async function GET(request: Request) {
+export async function GET() {
     try {
         const cookieStore = cookies();
         const accessToken = cookieStore.get("accessToken")?.value;
@@ -21,6 +21,7 @@ export async function GET(request: Request) {
             const decodedToken = verifyAccessToken(accessToken);
             userId = decodedToken.userId;
         } catch (error) {
+            console.error("Error:", error);
             return new Response(JSON.stringify({
                 success: false,
                 message: "Invalid or expired access token."

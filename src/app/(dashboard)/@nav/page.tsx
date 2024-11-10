@@ -22,22 +22,22 @@ export default function Nav(){
         </h1>
         
         <ul className="" >
-          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "All" ? " pl-5 text-blue-300" : ""}`}  onClick={() => setType("All")}  >
+          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "All" ? " pl-5 text-blue-400" : ""}`}  onClick={() => setType("All")}  >
               <FontAwesomeIcon className="h-4" icon={faLayerGroup} />
               <h1>All</h1>
           </li>
 
-          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "General" ? " pl-5 text-blue-300" : ""}`}  onClick={() => setType("General")} >
+          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "General" ? " pl-5 text-blue-400" : ""}`}  onClick={() => setType("General")} >
               <FontAwesomeIcon className="h-4" icon={faCalendarWeek} />
               <h1>General</h1>
           </li>
 
-          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "Important" ? " pl-5 text-blue-300" : ""}`}  onClick={() => setType("Important")}  >
+          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "Important" ? " pl-5 text-blue-400" : ""}`}  onClick={() => setType("Important")}  >
               <FontAwesomeIcon className="h-4" icon={faStar} />
               <h1>Important</h1>
           </li>
 
-          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "Starred" ? " pl-5 text-blue-300" : ""}`}  onClick={() => setType("Starred")} >
+          <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == "Starred" ? " pl-5 text-blue-400" : ""}`}  onClick={() => setType("Starred")} >
               <FontAwesomeIcon className="h-4" icon={faLayerGroup} />
               <h1>Starred</h1>
           </li>

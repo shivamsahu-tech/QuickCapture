@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         const cookieStore = cookies();
         const unknownUserToken = cookieStore.get("unknownUserToken")?.value;
         const accessToken = cookieStore.get("accessToken")?.value;
-        var user;
+        let user;
         console.log( "unknnown user tomek : ", unknownUserToken)
         if (unknownUserToken) {
             try {
@@ -42,6 +42,7 @@ export async function POST(request: Request) {
 
                 user = result.rows[0];
             } catch (error) {
+                console.error("Error in change-password api : ", error)
                 return new Response(
                     JSON.stringify({
                         success: false,
@@ -147,6 +148,7 @@ export async function POST(request: Request) {
             }
         );
     } catch (error) {
+        console.error("Error in change password api : ", error)
         return new Response(
             JSON.stringify({
                 success: false,

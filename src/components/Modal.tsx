@@ -3,9 +3,7 @@
 import {
     Dialog,
     DialogOverlay,
-    DialogContent,
 } from "./ui/dialog"
-import { useRouter } from "next/navigation"
 
 export function Modal({
     children,

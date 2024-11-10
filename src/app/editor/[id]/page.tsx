@@ -1,9 +1,9 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Editor from '@/components/Editor'
 import { useNote } from '@/context/NoteContext'
 
-function page() {
+export default function Page() {
 
  const {Note} = useNote()
 
@@ -11,4 +11,4 @@ function page() {
   return <Editor isIntercepting={false} content={Note}  />
 }
 
-export default page
+
