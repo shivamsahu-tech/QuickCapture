@@ -1,19 +1,40 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NoteCards from "@/app/@modal/@noteCards/page"
 import { useNote } from "@/context/NoteContext";
 import {Note} from "@/types/Notes"
 import { nanoid } from "nanoid";
 
 export default function NotesPage(){
-    const [width, setWidth] = useState(window.innerWidth)
-    const {Notes, type} = useNote();
-    window.addEventListener('resize', () => {
+    const [width, setWidth] = useState<number>(500);
+
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        setWidth(window.innerWidth);
+      }
+    }, []);
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const handleResize = () => {
+            setWidth(window.innerWidth)
+        };
+  
+        window.addEventListener('resize', handleResize);
+          return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }
+    }, []);
+
+    useEffect(() => {
         if(width > 1220) setCols(4);
         else if(width > 720) setCols(3);
         else setCols(2);
-        setWidth(window.innerWidth)
-    })
+    }, [width])
+
+    const {Notes, type} = useNote();
+
 
     const [cols, setCols] = useState(width > 1220 ? 4 : width > 720 ? 3 : 2);
     const colBoxes = [];

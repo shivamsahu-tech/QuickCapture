@@ -12,10 +12,29 @@ import { useToast } from "@/hooks/use-toast";
 
 
 export default function Home() {
-  const [width, setWidth] = useState(window.innerWidth)
-  window.addEventListener('resize', () => {
-      setWidth(window.innerWidth)
-  })
+  const [width, setWidth] = useState<number>(500);
+
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        setWidth(window.innerWidth);
+      }
+    }, []);
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const handleResize = () => {
+          setWidth(window.innerWidth);
+        };
+  
+        window.addEventListener('resize', handleResize);
+          return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }
+    }, []);
+
+
+ 
 
   const {Note, Notes, setNotes} = useNote();
   const pathname = usePathname(); // Use `usePathname` to track the route

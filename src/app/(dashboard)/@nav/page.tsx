@@ -2,14 +2,29 @@
 import { useNote } from "@/context/NoteContext"
 import { faCalendarWeek, faLayerGroup, faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Nav(){
+    const [width, setWidth] = useState<number>(500);
 
-    const [width, setWidth] = useState(window.innerWidth)
-    window.addEventListener('resize', () => {
-        setWidth(window.innerWidth)
-    })
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        setWidth(window.innerWidth);
+      }
+    }, []);
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const handleResize = () => {
+          setWidth(window.innerWidth);
+        };
+  
+        window.addEventListener('resize', handleResize);
+          return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }
+    }, []);
 
     const {setType, type} = useNote()
     

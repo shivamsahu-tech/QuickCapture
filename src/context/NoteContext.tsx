@@ -27,12 +27,19 @@ interface NoteContextType {
 const NoteContext = createContext<NoteContextType | undefined>(undefined);
 
 export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
-  const [Note, setNote] = useState<Note>(() => {
-    const savedNote = localStorage.getItem("note");
-    return savedNote ? JSON.parse(savedNote) : defaultNote;  // Initialize from localStorage if available
-  });
+  const [Note, setNote] = useState<Note>(defaultNote);
   const [Notes, setNotes] = useState<Array<Note>>([]);
   const [type, setType] = useState<string>("All")
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setNote(() => {
+        const savedNote = localStorage.getItem("note");
+        return savedNote ? JSON.parse(savedNote) : defaultNote;
+      });
+    }
+  }, []);
+  
 
   const fetchNotes = async (): Promise<Array<Note>> => {
     try {
@@ -57,8 +64,8 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   }, []); 
 
   useEffect(() => {
-    if (Note) {
-      localStorage.setItem("note", JSON.stringify(Note));  // Save the current note to localStorage
+    if (Note || typeof window !== 'undefined') {
+      localStorage.setItem("note", JSON.stringify(Note));  
     }
   }, [Note]);
 
