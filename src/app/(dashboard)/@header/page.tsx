@@ -66,6 +66,7 @@ export default function Header() {
                 });
             }
         } catch (error) {
+            console.error("Error : ", error)
             toast({
                 variant: "destructive",
                 title: "Something went wrong!!",
