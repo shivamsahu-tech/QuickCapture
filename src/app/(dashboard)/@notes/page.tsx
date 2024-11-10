@@ -1,8 +1,8 @@
 'use client'
 import { useState } from "react";
 import NoteCards from "@/app/@modal/@noteCards/page"
-import { Note } from "c:/Users/91854/Desktop/quickcapture/src/types/Notes";
 import { useNote } from "@/context/NoteContext";
+import {Note} from "@/types/Notes"
 import { nanoid } from "nanoid";
 
 export default function NotesPage(){
