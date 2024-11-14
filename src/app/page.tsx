@@ -148,8 +148,6 @@ export default function Home() {
       )
     }
     <Create/>
-    
-    
   </div>
   )
   
