@@ -1,13 +1,15 @@
-import { nanoid } from "nanoid";
+'use client'
 import React from "react";
 
 export default function Dates() {
+    
     const dates = generateDates();
+   
     return (
        <div className=" w-full flex justify-center py-2 gap-3 overflow-hidden" >
         {
             dates.map((obj) => (
-                <DateBox key={nanoid()} day={obj.day} date={obj.date} month={obj.month} isToday={obj.isToday} />
+                <DateBox key={Math.random()*83749} day={obj.day} date={obj.date} month={obj.month} isToday={obj.isToday} />
             ))
         }  
        </div>
@@ -20,6 +22,8 @@ type DateProps = {
     month: string;
     isToday: boolean;
 }
+
+
 
 const DateBox = ({ day, date, month, isToday }: DateProps) => {
     return (

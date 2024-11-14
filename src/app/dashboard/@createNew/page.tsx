@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react';
 
 
-function Create() {
+export default function Create() {
 
   const [isClient, setIsClient] = useState(false);
   const id = nanoid();
@@ -68,4 +68,3 @@ function Create() {
   )
 }
 
-export default Create

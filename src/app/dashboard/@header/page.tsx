@@ -1,3 +1,4 @@
+'use client'
 import { Spinner } from "@/components/ui/Spinner";
 import { useToast } from "@/hooks/use-toast";
 import { faArrowUpFromBracket, faMagnifyingGlass, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
@@ -13,9 +14,9 @@ export default function Header() {
     const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
 
-    const setHiddenProperty = () => {
-        setHidden((state) => !state);
-    };
+    const [isClient, setIsClient] = useState(false);
+
+   
 
     const changePassword = async() => {
         setIsLoading(true);
@@ -90,6 +91,16 @@ export default function Header() {
 
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        setIsClient(true);
+      }, []);
+    
+      if (!isClient) return null; 
+
+    const setHiddenProperty = () => {
+        setHidden((state) => !state);
+    };
 
     return (
         <div className="w-full flex items-center">

@@ -7,11 +7,11 @@ import { useToast } from "@/hooks/use-toast";
 import dynamic from 'next/dynamic';
 
 // Dynamically importing components to run only on the client-side (SSR is disabled)
-const Nav = dynamic(() => import("./(dashboard)/@nav/page"), { ssr: false });
-const Header = dynamic(() => import("./(dashboard)/@header/page"), { ssr: false });
-const Dates = dynamic(() => import("./(dashboard)/@dates/page"), { ssr: false });
-const NotesPage = dynamic(() => import("./(dashboard)/@notes/page"), { ssr: false });
-const Create = dynamic(() => import("./(dashboard)/@createNew/page"), { ssr: false });
+const Nav = dynamic(() => import("./dashboard/@nav/page"), { ssr: false });
+const Header = dynamic(() => import("./dashboard/@header/page"), { ssr: false });
+const Dates = dynamic(() => import("./dashboard/@dates/page"), { ssr: false });
+const NotesPage = dynamic(() => import("./dashboard/@notes/page"), { ssr: false });
+const Create = dynamic(() => import("./dashboard/@createNew/page"), { ssr: false });
 
 
 export default function Home() {
