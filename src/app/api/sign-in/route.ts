@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { generateAccessAndRefreshToken } from "@/utils/jwt";
 import bcrypt from 'bcrypt';
 import { cookies } from "next/headers";

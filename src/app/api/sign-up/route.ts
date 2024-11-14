@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import pool from "@/db/db";
 import { generateAccessAndRefreshToken } from "@/utils/jwt";
 import {nanoid} from 'nanoid'

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import pool from '@/db/db';
 import { verifyAccessToken } from '@/utils/jwt';
 import { cookies } from 'next/headers';
