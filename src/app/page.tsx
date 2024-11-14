@@ -1,15 +1,17 @@
 'use client'
 import "./globals.css";
-import Dates from "./(dashboard)/@dates/page";
-import Header from "./(dashboard)/@header/page";
-import Nav from "./(dashboard)/@nav/page";
-import NotesPage from "./(dashboard)/@notes/page";
-import Create from "./(dashboard)/@createNew/page"
-import {  useEffect, useState } from "react";
 import { useNote } from "@/context/NoteContext";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
+import dynamic from 'next/dynamic';
 
+// Dynamically importing components to run only on the client-side (SSR is disabled)
+const Nav = dynamic(() => import("./(dashboard)/@nav/page"), { ssr: false });
+const Header = dynamic(() => import("./(dashboard)/@header/page"), { ssr: false });
+const Dates = dynamic(() => import("./(dashboard)/@dates/page"), { ssr: false });
+const NotesPage = dynamic(() => import("./(dashboard)/@notes/page"), { ssr: false });
+const Create = dynamic(() => import("./(dashboard)/@createNew/page"), { ssr: false });
 
 
 export default function Home() {
