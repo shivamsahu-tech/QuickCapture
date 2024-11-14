@@ -10,6 +10,9 @@ import React, { useEffect, useState } from 'react';
 function Create() {
 
   const [isClient, setIsClient] = useState(false);
+  const id = nanoid();
+  const router = useRouter();
+  const {setNote} = useNote();
 
   // This ensures that the code will only run once the component is mounted on the client
   useEffect(() => {
@@ -42,9 +45,7 @@ function Create() {
     return matteColors[randomIndex];
   }
   
-  const id = nanoid();
-  const router = useRouter();
-  const {setNote} = useNote();
+  
 
   const createNote = () => {
     setNote({
