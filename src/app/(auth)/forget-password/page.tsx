@@ -12,6 +12,14 @@ export default function Page()  {
   const [isLoading, setIsLoading] = useState(false);
 
   const sentOtp = async() => {
+    if(!email){
+      toast({
+        variant: "destructive",
+        title: "Invalid Email",
+        description: "Please try again",
+    });
+    return;
+    }
     setIsLoading(true);
     try {
       console.log("entered to sent otp funciton");
@@ -23,8 +31,8 @@ export default function Page()  {
       if (response.ok) {
           toast({
               title: "Successful!!",
-              description: "OTP sent successfully!!",
-              className: "bg-green-600",
+              description: "OTP sent, if Email Exist!!",
+              className: "bg-blue-300",
           });
           console.log("otp sent successfylly")
           router.push("/change-password");
@@ -53,7 +61,7 @@ export default function Page()  {
     <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
         <img className="mx-auto h-16 w-auto" src="https://th.bing.com/th/id/OIP.wlVtctNEeskBNhpk2H2UFQHaHa?pid=ImgDet&w=474&h=474&rs=1" alt="QuickCapture"/>
         <h1 className='text-center'>Quick Capture</h1>
-        <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight whitespace-nowrap text-gray-900 px-16">Change your password</h2>
+        <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900 px-16">Change your password</h2>
     </div>
 
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

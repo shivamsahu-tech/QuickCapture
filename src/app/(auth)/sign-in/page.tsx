@@ -13,6 +13,14 @@ export default function Page()  {
   const {toast} = useToast();
 
   const submit = async() => {
+    if(!(email || password)){
+      toast({
+        variant: "destructive",
+        title: "Invalid Input",
+        description: "Please try again",
+    });
+    return;
+    }
     setIsLoading(true);
     try {
       const result = await fetch("/api/sign-in", {

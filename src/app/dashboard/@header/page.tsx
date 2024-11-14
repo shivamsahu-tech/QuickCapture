@@ -131,13 +131,13 @@ export default function Header() {
                     className={`absolute z-10 w-auto whitespace-nowrap bg-slate-800 text-white top-[100%] right-0 flex flex-col p-1 rounded-md ${hidden ? "hidden" : ""}`}
                     ref={menubarRef}
                 >
-                    <div className="flex items-center gap-5 m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer">
+                    {/* <div className="flex items-center gap-5 m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer">
                         <h1 className="font-semibold text-sm">Profile Photo</h1>
                         <label htmlFor="file-upload">
                             <FontAwesomeIcon icon={faArrowUpFromBracket} />
                         </label>
                         <input type="file" id="file-upload" className="hidden" />
-                    </div>
+                    </div> */}
                     <div className="m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600  cursor-pointer flex justify-center items-center"
                          onClick={changePassword}
                     >

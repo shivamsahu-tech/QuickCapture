@@ -17,6 +17,14 @@ export default function Page() {
   const router = useRouter();
 
   const submit = async() => {
+    if(!(otp || password)){
+      toast({
+        variant: "destructive",
+        title: "Invalid Input",
+        description: "Please try again",
+    });
+    return;
+    }
     setIsLoading(true);
     try {
       const result = await fetch("/api/change-password", {
@@ -78,7 +86,7 @@ export default function Page() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
           <img className="mx-auto h-16 w-auto" src="https://th.bing.com/th/id/OIP.wlVtctNEeskBNhpk2H2UFQHaHa?pid=ImgDet&w=474&h=474&rs=1" alt="QuickCapture"/>
           <h1 className='text-center'>Quick Capture</h1>
-          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900 px-16">Create New Password</h2>
+          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900 px-16 ">Create New Password</h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
