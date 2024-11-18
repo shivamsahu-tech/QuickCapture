@@ -2,6 +2,7 @@
 // NoteContext.ts
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { Note } from "@/types/Notes";
+import { GuestNotes } from "@/GuestNote";
 
 // Define the default note value
 const defaultNote: Note = {
@@ -22,6 +23,8 @@ interface NoteContextType {
   setNotes: (notes: Array<Note>) => void;
   type: string;
   setType: (type:string) => void;
+  isGuest: boolean;
+  setIsGuest: (type:boolean) => void;
 }
 
 const NoteContext = createContext<NoteContextType | undefined>(undefined);
@@ -29,7 +32,8 @@ const NoteContext = createContext<NoteContextType | undefined>(undefined);
 export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   const [Note, setNote] = useState<Note>(defaultNote);
   const [Notes, setNotes] = useState<Array<Note>>([]);
-  const [type, setType] = useState<string>("All")
+  const [type, setType] = useState<string>("All");
+  const [isGuest, setIsGuest] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -56,7 +60,8 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const loadNotes = async () => {
       const fetchedNotes = await fetchNotes(); 
-      setNotes(fetchedNotes);
+      console.log("fetched notes: ",fetchedNotes)
+      setNotes(fetchedNotes ? fetchedNotes : GuestNotes);
       console.log("set note : ",  fetchedNotes)
     };
 
@@ -70,7 +75,7 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   }, [Note]);
 
   return (
-    <NoteContext.Provider value={{ Note, setNote, Notes, setNotes , type, setType}}>
+    <NoteContext.Provider value={{ Note, setNote, Notes, setNotes , type, setType, isGuest, setIsGuest}}>
       {children}
     </NoteContext.Provider>
   );

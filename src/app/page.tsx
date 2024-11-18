@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import dynamic from 'next/dynamic';
+import { useRouter } from "next/navigation";
 
 // Dynamically importing components to run only on the client-side (SSR is disabled)
 const Nav = dynamic(() => import("./dashboard/@nav/page"), { ssr: false });
@@ -16,6 +17,8 @@ const Create = dynamic(() => import("./dashboard/@createNew/page"), { ssr: false
 
 export default function Home() {
   const [width, setWidth] = useState<number>(500);
+  const {isGuest} = useNote();
+  const router = useRouter();
 
     useEffect(() => {
       if (typeof window !== 'undefined') {
@@ -44,6 +47,14 @@ export default function Home() {
   const {toast} = useToast();
 
   const saveNoteToServer = async () => {
+    if(isGuest){
+      toast({
+        variant: 'destructive',
+        title: "Authorize Yourself!!",
+        description: "sign in before save notes"
+      })
+      return;
+    }
     console.log('Saving note to the server: ', Note);
     try{
       const response = await fetch("/api/save-note", {

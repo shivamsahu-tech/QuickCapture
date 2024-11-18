@@ -9,11 +9,12 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useToast } from "@/hooks/use-toast";
 
 
-export default function NoteCards({content} : {content: Note}){
+export default function 
+NoteCards({content} : {content: Note}){
 
 
     const sanitizedHtmlString: string = DOMPurify.sanitize(content.text);
-    const {setNote, setNotes, Notes} = useNote();
+    const {setNote, setNotes, Notes, isGuest} = useNote();
     const {toast} = useToast();
     const router = useRouter();
 
@@ -24,11 +25,23 @@ export default function NoteCards({content} : {content: Note}){
     }
 
     const handleTrashClick = (event: any) => {
+      
       event.stopPropagation();  
       deleteNote();
     };
 
+
+
     const deleteNote = async() => {
+      if(isGuest){
+        router.push(`/sign-up`);
+        toast({
+          variant: 'destructive',
+          title: "Authorize Yourself!!",
+          description: "sign in before delete notes"
+        })
+        return;
+      }
       console.log("Enterd in delete note")
         try {
           const response = await fetch(`/api/delete-note`, {

@@ -1,7 +1,8 @@
 'use client'
 import { Spinner } from "@/components/ui/Spinner";
+import { useNote } from "@/context/NoteContext";
 import { useToast } from "@/hooks/use-toast";
-import { faArrowUpFromBracket, faMagnifyingGlass, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {  faMagnifyingGlass, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -13,12 +14,21 @@ export default function Header() {
     const profileRef = useRef<HTMLDivElement | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
-
+    const {isGuest} = useNote();
     const [isClient, setIsClient] = useState(false);
 
    
 
     const changePassword = async() => {
+        if(isGuest){
+            router.push(`/sign-up`);
+            toast({
+              variant: 'destructive',
+              title: "Authorize Yourself!!",
+              description: "sign in First"
+            })
+            return;
+          }
         setIsLoading(true);
         try {
             const response = await fetch("/api/send-otp", {
@@ -50,6 +60,15 @@ export default function Header() {
     }
 
     const signOut = async () => {
+        if(isGuest){
+            router.push(`/sign-up`);
+            toast({
+              variant: 'destructive',
+              title: "Authorize Yourself!!",
+              description: "sign in First"
+            })
+            return;
+          }
         try {
             console.log("sign out called");
             const response = await fetch("/api/sign-out");

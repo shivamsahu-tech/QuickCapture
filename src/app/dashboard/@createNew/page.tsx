@@ -1,5 +1,6 @@
 'use client'
 import { useNote } from '@/context/NoteContext';
+import { useToast } from '@/hooks/use-toast';
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { nanoid } from 'nanoid';
@@ -12,7 +13,8 @@ export default function Create() {
   const [isClient, setIsClient] = useState(false);
   const id = nanoid();
   const router = useRouter();
-  const {setNote} = useNote();
+  const {setNote, isGuest} = useNote();
+  const {toast} = useToast();
 
   // This ensures that the code will only run once the component is mounted on the client
   useEffect(() => {
@@ -48,6 +50,15 @@ export default function Create() {
   
 
   const createNote = () => {
+    if(isGuest){
+      router.push(`/sign-up`);
+      toast({
+        variant: 'destructive',
+        title: "Authorize Yourself!!",
+        description: "sign in before edit notes"
+      })
+      return;
+    }
     setNote({
       id,
       title: "",

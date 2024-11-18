@@ -1,8 +1,9 @@
 "use client"
 import { Spinner } from '@/components/ui/Spinner';
+import { useNote } from '@/context/NoteContext';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 export default function Page()  {
 
@@ -15,6 +16,8 @@ export default function Page()  {
   const [isLoading, setIsLoading] = useState(false)
   const {toast} = useToast();
   const router = useRouter();
+  const {setIsGuest} = useNote();
+  const [guestLoading, setGuestLoading] = useState(false)
 
   useEffect(() => {
     if(!isValidPassword || !isPasswordSame){
@@ -77,7 +80,44 @@ export default function Page()  {
       setPassword("");
       setCnfPassword("");
       setIsLoading(false);
+  } 
+  
+  
+  
+  const signGuest = async() => {
+    setGuestLoading(true);
+    try {
+      const result = await fetch("/api/sign-in-guest");
+      if(result.ok){
+        router.push("/");
+        setIsGuest(true)
+        toast({
+          title: "Signed in as Guest!!",
+          description: "Guest for next 15min",
+          className: "bg-green-600"
+        });
+
+      }else{
+        toast({
+          variant: 'destructive',
+          title: "Something went wrong",
+          description: "Please Try again",
+        });
+      }
+      
+    } catch (error) {
+        console.error("sign up submit error : ", error);
+        toast({
+          variant: 'destructive',
+          title: "Something went wrong!",
+          description: "please Try Again",
+        });
+    }
+    setGuestLoading(false);
   }
+
+
+
 
   return (
   <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
@@ -130,7 +170,9 @@ export default function Page()  {
           </div>
           </div>
 
-          <button  className="flex mx-auto mt-5 justify-center rounded-md bg-white  px-3 py-1.5 text-sm/6 font-semibold text-black shadow-sm hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-300">Sign up As Guest</button>
+          <button  className="flex mx-auto mt-5 justify-center rounded-md bg-white  px-3 py-1.5 text-sm/6 font-semibold text-black shadow-sm hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-300"
+          onClick={signGuest}
+          >{ !guestLoading ? "Sign up As Guest" : <Spinner />  }</button>
 
           <p className="mt-5 text-center text-sm/6 text-gray-500">
           Already have Account?
