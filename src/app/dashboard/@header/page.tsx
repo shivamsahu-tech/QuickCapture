@@ -13,6 +13,7 @@ export default function Header() {
     const menubarRef = useRef<HTMLDivElement | null>(null);
     const profileRef = useRef<HTMLDivElement | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [logoutLoading, setLogoutLoading] = useState(false);
     const { toast } = useToast();
     const {isGuest} = useNote();
     const [isClient, setIsClient] = useState(false);
@@ -60,6 +61,7 @@ export default function Header() {
     }
 
     const signOut = async () => {
+        setLogoutLoading(true);
         if(isGuest){
             router.push(`/sign-up`);
             toast({
@@ -93,6 +95,7 @@ export default function Header() {
             });
         }
         router.push("/sign-up");
+        setLogoutLoading(false);
     };
 
     useEffect(() => {
@@ -165,7 +168,7 @@ export default function Header() {
                         className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer"
                         onClick={signOut} // Attach signOut directly here
                     >
-                        <h1 className="font-semibold text-sm">Logout</h1>
+                        <h1 className="font-semibold text-sm mr-4">{logoutLoading ? <Spinner size={4} /> : "LogOut"}</h1>
                         <FontAwesomeIcon icon={faRightFromBracket} />
                     </div>
                 </div>

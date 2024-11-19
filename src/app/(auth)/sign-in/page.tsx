@@ -13,7 +13,7 @@ export default function Page()  {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {toast} = useToast();
-  const {setNotes} = useNote();
+  const {setNotes, setIsGuest} = useNote();
   const [guestLoading, setGuestLoading] = useState(false);
 
 
