@@ -2,6 +2,7 @@
 import { Spinner } from '@/components/ui/Spinner';
 import { useNote } from '@/context/NoteContext';
 import { useToast } from '@/hooks/use-toast';
+import { Note } from '@/types/Notes';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
@@ -12,8 +13,20 @@ export default function Page()  {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {toast} = useToast();
-  const {setIsGuest} = useNote();
+  const {setNotes} = useNote();
   const [guestLoading, setGuestLoading] = useState(false);
+
+
+  const fetchNotes = async (): Promise<Array<Note>> => {
+    try {
+      const response = await fetch('/api/get-notes'); 
+      const data = await response.json();
+      return data.data; 
+    } catch (error) {
+      console.error("Error in fetching notes:", error);
+      return []; 
+    }
+  };
 
   const submit = async() => {
     if(!(email || password)){
@@ -35,7 +48,11 @@ export default function Page()  {
       });
       const data = await result.json();
       if(result.ok){
-        if(data.user.isverified) router.push("/");
+        if(data.user.isverified){
+          const fetchedNotes = await fetchNotes();
+          setNotes(fetchedNotes);
+          router.push("/");
+        }
         else{
           toast({
             title: "OTP sent successfully",
@@ -77,7 +94,7 @@ export default function Page()  {
           description: "Guest for next 15min",
           className: "bg-green-600"
         });
-
+        
       }else{
         toast({
           variant: 'destructive',

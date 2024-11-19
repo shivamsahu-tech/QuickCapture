@@ -1,17 +1,19 @@
-// middleware.ts
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export function middleware(request: Request) {
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken');
-  const isGuest = cookieStore.get('isGuest');
+  const isGuest = cookieStore.get('isGuest')?.value;
 
-  if (!accessToken && !isGuest) {
+  const response = NextResponse.next();
+
+  
+  if (!accessToken && (!isGuest || isGuest === 'false')) {
     return NextResponse.redirect(new URL('/sign-up', request.url));
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {

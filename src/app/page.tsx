@@ -40,8 +40,6 @@ export default function Home() {
     }, []);
 
 
- 
-
   const {Note, Notes, setNotes} = useNote();
   const pathname = usePathname(); 
   const {toast} = useToast();

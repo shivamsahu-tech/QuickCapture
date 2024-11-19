@@ -3,6 +3,7 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { Note } from "@/types/Notes";
 import { GuestNotes } from "@/GuestNote";
+import { useRouter } from "next/navigation";
 
 // Define the default note value
 const defaultNote: Note = {
@@ -34,6 +35,7 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   const [Notes, setNotes] = useState<Array<Note>>([]);
   const [type, setType] = useState<string>("All");
   const [isGuest, setIsGuest] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -59,11 +61,34 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const loadNotes = async () => {
       const fetchedNotes = await fetchNotes(); 
-      setNotes(!isGuest ? fetchedNotes : GuestNotes);
+      console.log("Fetched notes: ", fetchedNotes)
+      if(isGuest) setNotes(GuestNotes);
+      else setNotes(fetchedNotes);
+      console.log("notes : ", Notes)
     };
 
     loadNotes(); 
-  }, []); 
+  }, [router, Note, isGuest]); 
+
+
+
+  useEffect(() => {
+
+    function getCookie(name: string): string | null {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift() ?? null;
+      return null;
+    }
+
+    if (Note || typeof window !== 'undefined') {
+      const isGuestCookie = getCookie("isGuest");
+      if(!isGuest && (isGuestCookie && isGuestCookie == 'true')){
+        document.cookie = "isGuest=false";
+        router.push('/sign-up');
+      }
+    }
+  }, [isGuest, router]);
 
   useEffect(() => {
     if (Note || typeof window !== 'undefined') {

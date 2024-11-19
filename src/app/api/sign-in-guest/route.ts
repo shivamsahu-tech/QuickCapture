@@ -6,7 +6,7 @@ export async function GET(request:Request) {
     cookieStore.set('isGuest', 'true', {
         maxAge,
         path: '/',
-        httpOnly: true,
+        httpOnly: false,
     })
 
     return new Response(JSON.stringify({

@@ -95,7 +95,7 @@ export default function Page()  {
           description: "Guest for next 15min",
           className: "bg-green-600"
         });
-
+        
       }else{
         toast({
           variant: 'destructive',
