@@ -64,7 +64,7 @@ export default function Nav(){
         <ul className="" >
           {
             types.map(({category, icon} : option) => (
-                  <li className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == `${category}` ? " pl-5 text-blue-400" : ""}`} style={{color: type == `${category}` ? '#60a5fa' : ""}}   onClick={() => setType(category)}  >
+                  <li key={category} className={` text-md font-semibold text-white border-b-[1px] p-1 flex items-center cursor-pointer transition-all gap-2 ${type == `${category}` ? " pl-5 text-blue-400" : ""}`} style={{color: type == `${category}` ? '#60a5fa' : ""}}   onClick={() => setType(category)}  >
                       <FontAwesomeIcon className="h-4" icon={icon} />
                       <h1>{category}</h1>
                   </li>
@@ -77,7 +77,7 @@ export default function Nav(){
         <div className="flex p-2 " >
             {
               types.map(({category, icon}: option) => (
-                <h1 className={`border-[1px] px-2 border-black rounded-xl text-md font-semibold py-1 mx-2  cursor-pointer ${type == `${category}` ? "bg-black text-white" : ""}`} onClick={() => setType(`${category}`)} >{category}</h1>
+                <h1 key={category} className={`border-[1px] px-2 border-black rounded-xl text-md font-semibold py-1 mx-2  cursor-pointer ${type == `${category}` ? "bg-black text-white" : ""}`} onClick={() => setType(`${category}`)} >{category}</h1>
               ))
             }
            
