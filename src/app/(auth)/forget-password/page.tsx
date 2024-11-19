@@ -22,19 +22,16 @@ export default function Page()  {
     }
     setIsLoading(true);
     try {
-      console.log("entered to sent otp funciton");
       const response = await fetch("/api/send-otp", {
           method: "POST",
           body: JSON.stringify({ email })
       });
-      console.log("forget password response: ", response)
       if (response.ok) {
           toast({
               title: "Successful!!",
               description: "OTP sent, if Email Exist!!",
               className: "bg-blue-300",
           });
-          console.log("otp sent successfylly")
           router.push("/change-password");
       } else {
           toast({

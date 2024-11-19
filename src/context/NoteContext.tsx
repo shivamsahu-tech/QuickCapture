@@ -49,7 +49,6 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       const response = await fetch('/api/get-notes'); 
       const data = await response.json();
-      console.log(data.data)
       return data.data; 
     } catch (error) {
       console.error("Error in fetching notes:", error);
@@ -60,9 +59,7 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const loadNotes = async () => {
       const fetchedNotes = await fetchNotes(); 
-      console.log("fetched notes: ",fetchedNotes)
-      setNotes(fetchedNotes ? fetchedNotes : GuestNotes);
-      console.log("set note : ",  fetchedNotes)
+      setNotes(!isGuest ? fetchedNotes : GuestNotes);
     };
 
     loadNotes(); 

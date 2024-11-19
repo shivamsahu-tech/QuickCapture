@@ -7,7 +7,6 @@ import { cookies } from "next/headers";
 export async function POST(request: Request) {
     try {
         const Note = await request.json();
-        console.log("NOTES IS:", Note);
         
         const cookieStore = cookies();
         const accessToken = cookieStore.get("accessToken")?.value;

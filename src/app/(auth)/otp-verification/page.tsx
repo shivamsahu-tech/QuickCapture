@@ -21,7 +21,6 @@ export default function Page()  {
         },
         body: JSON.stringify({ otp })
       })
-      console.log("Response : ", response)
       if(response.ok){
         toast({
           title: "Verified",
@@ -37,7 +36,7 @@ export default function Page()  {
         });
       }
     } catch (error) {
-        console.log("otp error : ", error)
+        console.error("otp error : ", error)
     }
     setOtp("");
     setIsLoading(false);

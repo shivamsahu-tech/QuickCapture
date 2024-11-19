@@ -70,7 +70,6 @@ export default function Header() {
             return;
           }
         try {
-            console.log("sign out called");
             const response = await fetch("/api/sign-out");
             if (response.ok) {
                 toast({

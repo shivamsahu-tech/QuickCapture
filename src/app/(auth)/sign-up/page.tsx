@@ -51,7 +51,6 @@ export default function Page()  {
           },
           body: JSON.stringify({ email, password })
         });
-        console.log("sign up result : ", result);
         const data = await result.json();
         if(result.ok){
           toast({

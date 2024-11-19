@@ -7,14 +7,12 @@ import { cookies } from "next/headers";
 export async function GET() {
 
     if (typeof window !== 'undefined') {
-        console.log('Running on client, skipping cookie check');
         return new Response(JSON.stringify({ success: false, message: 'Client-side access not allowed' }), { status: 400 });
     }
     
     try {
         const cookieStore = cookies();
         const accessToken = cookieStore.get("accessToken")?.value;
-        console.log("reached in sign out function")
         if (!accessToken) {
             return new Response(JSON.stringify({
                 success: false,

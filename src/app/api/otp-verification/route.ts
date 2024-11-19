@@ -20,11 +20,8 @@ export async function POST(request: Request) {
     
     const { otp } = await request.json();
 
-    console.log("USER OTP : ", otp);
-
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
-    console.log("REachecd till here", accessToken)
     if (!accessToken) {
         return new Response(
         JSON.stringify({
@@ -91,7 +88,6 @@ export async function POST(request: Request) {
         }
         );
     }
-    console.log("user  : ", user)
     
 
     if (user.isVerified) {

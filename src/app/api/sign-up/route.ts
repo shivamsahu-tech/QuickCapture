@@ -20,8 +20,6 @@ export async function POST(request: Request) {
 
     try {
         const { email, password } = await request.json();
-
-        console.log("email : ", email, "  password : ", password);
     
         const result = await pool.query(`select * from users where email = $1`,  [email]);
 

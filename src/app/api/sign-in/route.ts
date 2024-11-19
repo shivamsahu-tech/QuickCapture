@@ -20,7 +20,6 @@ export async function POST(request: Request) {
      */
     try {
         const { email, password } = await request.json();
-        console.log("email:", email, "Password:", password);
 
         const queryResult = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
@@ -34,7 +33,6 @@ export async function POST(request: Request) {
                 if(!user.isverified){
                     const otp = Math.floor(100000 + Math.random() * 900000);
                     await pool.query("UPDATE users SET refreshToken = $1, otp = $2, expires_at = NOW() + INTERVAL '10 minutes' WHERE id = $3", [refreshToken, otp, user.id]);
-                    console.log("reached till here")
                     //send email
                     await sendEmail({email, subject:"OTP Verification", otp})
                 }else{

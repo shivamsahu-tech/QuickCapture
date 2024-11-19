@@ -34,7 +34,6 @@ export default function Page() {
         },
         body: JSON.stringify({ otp, password })
       });
-      console.log("sign up result : ", result);
       const data = await result.json();
       if(result.ok){
         toast({

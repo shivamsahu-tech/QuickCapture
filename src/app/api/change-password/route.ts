@@ -29,7 +29,6 @@ export async function POST(request: Request) {
         const unknownUserToken = cookieStore.get("unknownUserToken")?.value;
         const accessToken = cookieStore.get("accessToken")?.value;
         let user;
-        console.log( "unknnown user tomek : ", unknownUserToken)
         if (unknownUserToken) {
             try {
                 const { email } = jwt.verify(

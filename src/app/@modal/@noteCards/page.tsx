@@ -42,13 +42,11 @@ NoteCards({content} : {content: Note}){
         })
         return;
       }
-      console.log("Enterd in delete note")
         try {
           const response = await fetch(`/api/delete-note`, {
             method: 'POST',
             body: JSON.stringify({id: content.id})
           })
-          console.log("Delete response: ", response)
           if(!response.ok){
             toast({
               variant: 'destructive',
@@ -59,7 +57,7 @@ NoteCards({content} : {content: Note}){
           }
           setNotes(Notes.filter((note) => note.id !== content.id));
         } catch (error) {
-          console.log("delete error : ", error)
+          console.error("delete error : ", error)
         }  
       };
     

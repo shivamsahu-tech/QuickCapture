@@ -39,7 +39,6 @@ export default function NotesPage(){
     const [cols, setCols] = useState(width > 1220 ? 4 : width > 720 ? 3 : 2);
     const colBoxes = [];
     const arr = type == "All" ?  Notes : Notes?.filter(note => note.type == type)
-    console.log(arr)
     for(let i = 0; i < cols; i++) {
         const array = arr?.filter((_, idx) => {
             return idx % cols === i; 

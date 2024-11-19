@@ -22,7 +22,7 @@ export const verifyAccessToken = (accessToken : string) => {
     const payload = jwt.verify(
         accessToken,
         process.env.ACCESS_TOKEN_SECRET || 'defaultSecret'
-      ) as JwtPayload; // Explicitly cast to JwtPayload
+      ) as JwtPayload; 
     
       if (!payload.userId) {
         throw new Error("User ID not found in the token");

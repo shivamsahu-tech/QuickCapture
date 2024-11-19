@@ -87,8 +87,6 @@ export async function POST(request: Request) {
             { expiresIn: '10min' }
         );
 
-        console.log("set unknownUserToken");
-
         cookieStore.set("unknownUserToken", unknownUserToken, { httpOnly: true, secure: true, sameSite: 'strict' });
 
         return new Response(JSON.stringify({

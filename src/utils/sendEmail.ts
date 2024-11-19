@@ -1,12 +1,10 @@
 import mailjet from 'node-mailjet';
 
 export default async function sendEmail({ email, subject, otp }: { email: string, subject: string, otp: number }) {
-    console.log("sendEmail function called");
 
     try {
         const apiKey = process.env.MAILJET_API_KEY as string;
         const apiSecret = process.env.MAILJET_SECRET_KEY as string;
-        // Create a Mailjet instance using the API key and secret
         const client = mailjet.apiConnect(
             apiKey,
             apiSecret
@@ -15,7 +13,7 @@ export default async function sendEmail({ email, subject, otp }: { email: string
         const request = client
             .post('send')
             .request({
-                FromEmail: 'shivamsahu2635@gmail.com',  // Use your verified email address
+                FromEmail: 'shivamsahu2635@gmail.com',  
                 FromName: 'QuickCapture',
                 Subject: subject,
                 'Html-part': `
@@ -35,7 +33,6 @@ export default async function sendEmail({ email, subject, otp }: { email: string
             });
 
         const result = await request;
-        console.log('Email sent successfully:', result.body);
     } catch (error) {
         console.error('Error sending email:', error);
     }

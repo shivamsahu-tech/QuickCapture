@@ -7,7 +7,6 @@ import { cookies } from "next/headers";
 export async function GET() {
 
     if (typeof window !== 'undefined') {
-        console.log('Running on client, skipping cookie check');
         return new Response(JSON.stringify({ success: false, message: 'Client-side access not allowed' }), { status: 400 });
     }
 

@@ -43,7 +43,7 @@ export default function Home() {
  
 
   const {Note, Notes, setNotes} = useNote();
-  const pathname = usePathname(); // Use `usePathname` to track the route
+  const pathname = usePathname(); 
   const {toast} = useToast();
 
   const saveNoteToServer = async () => {
@@ -55,17 +55,15 @@ export default function Home() {
       })
       return;
     }
-    console.log('Saving note to the server: ', Note);
     try{
       const response = await fetch("/api/save-note", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Make sure the content type is set
+          "Content-Type": "application/json", 
         },
-        body: JSON.stringify(Note), // Serialize the Note object
+        body: JSON.stringify(Note), 
       });
     
-      console.log(response);
       if(!response.ok){
         toast({
           variant: 'destructive',

@@ -33,9 +33,7 @@ export default function Page()  {
         },
         body: JSON.stringify({ email, password })
       });
-      console.log("sign in result : ", result);
       const data = await result.json();
-      console.log("data : ", data)
       if(result.ok){
         if(data.user.isverified) router.push("/");
         else{
