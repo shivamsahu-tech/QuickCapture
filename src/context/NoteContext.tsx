@@ -61,10 +61,8 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const loadNotes = async () => {
       const fetchedNotes = await fetchNotes(); 
-      console.log("Fetched notes: ", fetchedNotes)
       if(isGuest) setNotes(GuestNotes);
       else setNotes(fetchedNotes);
-      console.log("notes : ", Notes)
     };
 
     loadNotes(); 
