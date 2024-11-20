@@ -21,6 +21,8 @@
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [ShadCN](https://shadcn.dev/) for modern UI design
 - **Rich Text Editor**: [Quill](https://quilljs.com/)
 
+  
+## Check It Out:  [QuickCapture](https://quick-capture.vercel.app)
 
 ## Contact 
 **Linkedin**: [shsax](https://linkedin.com/in/shsax)
