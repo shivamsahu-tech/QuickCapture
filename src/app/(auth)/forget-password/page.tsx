@@ -53,7 +53,7 @@ export default function Page()  {
   }
 
   return (
-<div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
+<div className="w-[100vw] h-[100vh] flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
   <div className='border-2 border-slate-300 m-auto p-6 rounded-md' >
     <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
         <img className="mx-auto h-16 w-auto" src="https://th.bing.com/th/id/OIP.wlVtctNEeskBNhpk2H2UFQHaHa?pid=ImgDet&w=474&h=474&rs=1" alt="QuickCapture"/>
