@@ -56,13 +56,12 @@ export default function NotesPage(){
 }
 
 
-const Boxes = ({notesArray} : {notesArray: Note[]}) => {
-
+const Boxes = ({notesArray} : {notesArray: Note[]}) => {                      
     return (
         <div>
             {
-                notesArray?.map((obj) => (
-                    <NoteCards key={nanoid()} content={obj} />
+                notesArray?.map((obj: Note) => (
+                    <NoteCards key={obj.id} content={obj as Note} />
                 ))
             }
         </div>

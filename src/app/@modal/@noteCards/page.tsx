@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 
-export default function 
-NoteCards({content} : {content: Note}){
-
-
-    const sanitizedHtmlString: string = DOMPurify.sanitize(content.text);
+const NoteCards: React.FC<any> = (prop) => 
+  {
+    const [content, setContent] = useState(prop.content)
+    const sanitizedHtmlString: string = DOMPurify.sanitize(content?.text);
     const {setNote, setNotes, Notes, isGuest} = useNote();
     const {toast} = useToast();
     const router = useRouter();
@@ -21,16 +21,12 @@ NoteCards({content} : {content: Note}){
     const route = () => {
         setNote(content)
         router.push(`/editor/${content.id}`)
-
     }
 
     const handleTrashClick = (event: any) => {
-      
       event.stopPropagation();  
       deleteNote();
     };
-
-
 
     const deleteNote = async() => {
       if(isGuest){
@@ -61,7 +57,6 @@ NoteCards({content} : {content: Note}){
         }  
       };
     
-    
     return (
 
                 <div className={`w-full h-fit p-4 rounded-xl my-2 cursor-pointer`} style={{backgroundColor: content.color}} onClick={route} >
@@ -80,3 +75,6 @@ NoteCards({content} : {content: Note}){
 
     )
 }
+
+
+export default NoteCards;

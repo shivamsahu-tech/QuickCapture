@@ -16,7 +16,6 @@ export default function Page()  {
   const {setNotes, setIsGuest} = useNote();
   const [guestLoading, setGuestLoading] = useState(false);
 
-
   const fetchNotes = async (): Promise<Array<Note>> => {
     try {
       const response = await fetch('/api/get-notes'); 

@@ -25,7 +25,7 @@ export const GuestNotes: Note[] = [
         title: 'Showcase Notes',
         type: 'Info',
         text: 'These are prebuilt notes for demonstration purposes. Creating a new note using the "+" icon will remove all showcase notes.',
-        color: matteColors[4] // Darker Light Peach
+        color: matteColors[4] 
     },
     {
         id: '1',
