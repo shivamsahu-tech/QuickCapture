@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quick Capture – A Stylish Note-Taking App
 
-## Getting Started
+## Overview
+**Quick Capture** is a fully responsive, feature-rich note-taking application built with modern technologies for seamless and secure note management. Designed with a user-friendly interface and powerful functionality, it helps users capture, categorize, and organize their notes with ease.
 
-First, run the development server:
+## Features
+- **Masonry Layout for Notes**: Visually appealing card layout to organize notes efficiently.
+- **Rich Text Editor**: Integrated using Quill for an enhanced editing experience.
+- **Intercepting App Routes**: Utilizes Next.js intercepting routes for better navigation.
+- **Email OTP-Based Authentication**: Secure login, password reset, and change password features powered by Mailjet.
+- **Autosave Notes**: Automatically saves notes when the user navigates away from the editor.
+- **Note Categorization**: Easy navigation and categorization of notes for a streamlined user experience.
+- **Responsive Design**: Fully optimized for devices of all sizes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
+- **Frontend & Backend**: [Next.js 14](https://nextjs.org/)
+- **Programming Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/) hosted on [Aiven](https://aiven.io/)
+- **Email Service**: [Mailjet](https://www.mailjet.com/) for email-based OTP authentication
+- **Authorization**: JWT-based for secure user sessions
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [ShadCN](https://shadcn.dev/) for modern UI design
+- **Rich Text Editor**: [Quill](https://quilljs.com/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact 
+**Linkedin**: [shsax](https://linkedin.com/in/shsax)
