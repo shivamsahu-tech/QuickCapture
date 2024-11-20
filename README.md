@@ -3,6 +3,10 @@
 ## Overview
 **Quick Capture** is a fully responsive, feature-rich note-taking application built with modern technologies for seamless and secure note management. Designed with a user-friendly interface and powerful functionality, it helps users capture, categorize, and organize their notes with ease.
 
+![Alt text](./Screenshot 2024-11-10 080644.png)
+## Check It Out:  [QuickCapture](https://quick-capture.vercel.app)
+
+
 ## Features
 - **Masonry Layout for Notes**: Visually appealing card layout to organize notes efficiently.
 - **Rich Text Editor**: Integrated using Quill for an enhanced editing experience.
@@ -21,8 +25,6 @@
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [ShadCN](https://shadcn.dev/) for modern UI design
 - **Rich Text Editor**: [Quill](https://quilljs.com/)
 
-  
-## Check It Out:  [QuickCapture](https://quick-capture.vercel.app)
 
 ## Contact 
 **Linkedin**: [shsax](https://linkedin.com/in/shsax)
