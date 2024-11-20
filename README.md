@@ -3,7 +3,7 @@
 ## Overview
 **Quick Capture** is a fully responsive, feature-rich note-taking application built with modern technologies for seamless and secure note management. Designed with a user-friendly interface and powerful functionality, it helps users capture, categorize, and organize their notes with ease.
 
-![Alt text](./Screenshot 2024-11-10 080644.png)
+![Quick Capture Screenshot](./screenshot.png)
 ## Check It Out:  [QuickCapture](https://quick-capture.vercel.app)
 
 
