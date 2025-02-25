@@ -2,7 +2,7 @@
 import { Spinner } from "@/components/ui/Spinner";
 import { useNote } from "@/context/NoteContext";
 import { useToast } from "@/hooks/use-toast";
-import {  faMagnifyingGlass, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {  faArrowUpFromBracket, faCoffee, faMagnifyingGlass, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -14,9 +14,59 @@ export default function Header() {
     const profileRef = useRef<HTMLDivElement | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [logoutLoading, setLogoutLoading] = useState(false);
+    const [paymentLoading, setPaymentLoading] = useState(false);
     const { toast } = useToast();
     const {isGuest} = useNote();
     const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
+
+    const handlePayment = async () => {
+        setPaymentLoading(true);
+        try {
+          const orderResult = await fetch("/api/razorpay", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ amount: 1, currency: "INR" }), // ₹5.00
+          });
+           
+        //   console.log("order ": orderResult)
+    
+          const data = await orderResult.json();
+          console.log("data ", data)
+          if (!data.success) throw new Error("Order creation failed");
+    
+          const options = {
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use public key for client-side
+            amount: data.order.amount,
+            currency: data.order.currency,
+            name: "QuickCapture",
+            description: "Test Payment",
+            order_id: data.order.id,
+            handler: function (response: any) {
+              alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+              console.log(response);
+            },
+            theme: { color: "#3399cc" },
+          };
+    
+          if (typeof window !== "undefined" && (window as any).Razorpay) {
+                const rzp = new (window as any).Razorpay(options);
+                rzp.open();
+            } else {
+                throw new Error("Razorpay SDK not loaded");
+            }
+        
+        } catch (error) {
+          console.error("Payment Error:", error);
+        }
+        setPaymentLoading(false);
+      };
 
    
 
@@ -152,24 +202,43 @@ export default function Header() {
                     className={`absolute z-10 w-auto whitespace-nowrap bg-slate-800 text-white top-[100%] right-0 flex flex-col p-1 rounded-md ${hidden ? "hidden" : ""}`}
                     ref={menubarRef}
                 >
-                    {/* <div className="flex items-center gap-5 m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer">
+
+                    {/* for profile image upload */}
+                    <div className="flex items-center gap-5 m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer">
+                    
                         <h1 className="font-semibold text-sm">Profile Photo</h1>
                         <label htmlFor="file-upload">
                             <FontAwesomeIcon icon={faArrowUpFromBracket} />
                         </label>
+
                         <input type="file" id="file-upload" className="hidden" />
-                    </div> */}
+
+                        
+                       
+                    </div>
+
+
                     <div className="m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600  cursor-pointer flex justify-center items-center"
                          onClick={changePassword}
                     >
                         <h1 className="font-semibold text-sm">{isLoading ? <Spinner size={4} /> : "Change Password"}</h1>
                     </div>
+
                     <div
-                        className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer"
+                        className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
                         onClick={signOut} // Attach signOut directly here
                     >
                         <h1 className="font-semibold text-sm mr-4">{logoutLoading ? <Spinner size={4} /> : "LogOut"}</h1>
                         <FontAwesomeIcon icon={faRightFromBracket} />
+                    </div>
+                    
+
+                    {/* this is for payment purpose */}
+                    <div className="m-0.5 py-0.5 pl-1  rounded-md hover:bg-slate-600  cursor-pointer flex  justify-between items-center"
+                         onClick={handlePayment}
+                    >
+                        <h1 className="font-semibold text-sm">{paymentLoading ? <Spinner size={4} /> : "buy a coffee"}</h1>
+                        <FontAwesomeIcon className="mr-1" icon={faCoffee} />
                     </div>
                 </div>
             </div>

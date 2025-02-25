@@ -20,9 +20,7 @@ export async function POST(request: Request) {
      */
     try {
         const { email, password } = await request.json();
-
         const queryResult = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-
         if (queryResult.rows.length > 0) {
             const user = queryResult.rows[0];
             const isPasswordCorrect = await bcrypt.compare(password, user.password);
