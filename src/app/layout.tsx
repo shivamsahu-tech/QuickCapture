@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { NoteContextProvider } from "@/context/NoteContext";
 import { Toaster } from "@/components/ui/toaster";
+import FileUpload from "@/components/FileUpload";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
+  modal
 }: Readonly<{
   children: React.ReactNode
   modal: React.ReactNode
@@ -29,8 +30,11 @@ export default function RootLayout({
         <NoteContextProvider> 
           {modal}
           {children}
+          <FileUpload/>
         </NoteContextProvider>
         <Toaster/>
+        
+        {/* <h1>sdfsdf</h1> */}
       </body>
     </html>
   );

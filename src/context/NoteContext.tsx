@@ -26,6 +26,10 @@ interface NoteContextType {
   setType: (type:string) => void;
   isGuest: boolean;
   setIsGuest: (type:boolean) => void;
+  imageURL: string;
+  setImageURL: (type: string) => void;
+  isImageUploaderVisible: boolean;
+  setImageUploaderVisible: (type: boolean) => void;
 }
 
 const NoteContext = createContext<NoteContextType | undefined>(undefined);
@@ -35,6 +39,8 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   const [Notes, setNotes] = useState<Array<Note>>([]);
   const [type, setType] = useState<string>("All");
   const [isGuest, setIsGuest] = useState<boolean>(false);
+  const [imageURL , setImageURL] = useState<string>("https://api.dicebear.com/9.x/avataaars/svg?seed=Katherine");
+  const [isImageUploaderVisible, setImageUploaderVisible] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -68,6 +74,27 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
     loadNotes(); 
   }, [router, Note, isGuest]); 
 
+  const fetchProfileUrl = async (): Promise<string> => {
+    try {
+      const response = await fetch('/api/get-profileimageurl'); 
+      const data = await response.json();
+      console.log("fetched user profile image data: ", data.data[0].profileimageurl)
+      return data.data[0].profileimageurl; 
+    } catch (error) {
+      console.error("Error in fetching image url:", error);
+      return "https://api.dicebear.com/9.x/avataaars/svg?seed=Katherine"; 
+    }
+  };
+
+  useEffect(() => {
+    const profileImage = async () => {
+      const fetchedUrl = await fetchProfileUrl(); 
+      setImageURL(fetchedUrl)
+    };
+
+    profileImage(); 
+  }, []); 
+
 
 
   useEffect(() => {
@@ -95,7 +122,7 @@ export const NoteContextProvider = ({ children }: { children: ReactNode }) => {
   }, [Note]);
 
   return (
-    <NoteContext.Provider value={{ Note, setNote, Notes, setNotes , type, setType, isGuest, setIsGuest}}>
+    <NoteContext.Provider value={{ Note, setNote, Notes, setNotes , type, setType, isGuest, setIsGuest, imageURL, setImageUploaderVisible, setImageURL, isImageUploaderVisible}}>
       {children}
     </NoteContext.Provider>
   );

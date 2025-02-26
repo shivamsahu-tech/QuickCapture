@@ -2,7 +2,7 @@
 import { Spinner } from "@/components/ui/Spinner";
 import { useNote } from "@/context/NoteContext";
 import { useToast } from "@/hooks/use-toast";
-import {  faArrowUpFromBracket, faCoffee, faMagnifyingGlass, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {  faArrowUpFromBracket, faCoffee, faIdBadge, faMagnifyingGlass, faRightFromBracket, faScaleBalanced } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -16,7 +16,7 @@ export default function Header() {
     const [logoutLoading, setLogoutLoading] = useState(false);
     const [paymentLoading, setPaymentLoading] = useState(false);
     const { toast } = useToast();
-    const {isGuest} = useNote();
+    const {isGuest, imageURL, setImageUploaderVisible} = useNote();
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -189,12 +189,12 @@ export default function Header() {
 
             <div className="w-[15%] flex justify-center items-center relative">
                 <div
-                    className="h-12 w-12 pt-1 rounded-[100%] cursor-pointer bg-slate-800 overflow-hidden"
+                    className="h-12 w-12  rounded-[100%] cursor-pointer bg-white overflow-hidden border-2  border-blue-950 flex justify-center items-center"
                     onClick={setHiddenProperty}
                     ref={profileRef}
                 >
                     <img
-                        src="https://api.dicebear.com/9.x/avataaars/svg?seed=Katherine"
+                        src={imageURL}
                         alt="avatar"
                         />
                 </div>
@@ -204,16 +204,13 @@ export default function Header() {
                 >
 
                     {/* for profile image upload */}
-                    <div className="flex items-center gap-5 m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer">
-                    
+                    <div className="flex items-center gap-5 m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer"
+                    onClick={() => setImageUploaderVisible(true)}
+                    >
                         <h1 className="font-semibold text-sm">Profile Photo</h1>
                         <label htmlFor="file-upload">
                             <FontAwesomeIcon icon={faArrowUpFromBracket} />
-                        </label>
-
-                        <input type="file" id="file-upload" className="hidden" />
-
-                        
+                        </label>                      
                        
                     </div>
 
@@ -239,6 +236,23 @@ export default function Header() {
                     >
                         <h1 className="font-semibold text-sm">{paymentLoading ? <Spinner size={4} /> : "buy a coffee"}</h1>
                         <FontAwesomeIcon className="mr-1" icon={faCoffee} />
+                    </div>
+
+
+                    {/* contact us */}
+                    <div
+                        className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
+                    >
+                        <h1 className="font-semibold text-sm mr-4"><a href="/contact" >contact us</a></h1>
+                        <FontAwesomeIcon icon={faIdBadge} />
+                    </div>
+
+                    {/* term and conditions */}
+                    <div
+                        className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
+                    >
+                        <h1 className="font-semibold text-sm mr-4"><a href="/term&conds" >Term & Conds.</a></h1>
+                        <FontAwesomeIcon icon={faScaleBalanced} />
                     </div>
                 </div>
             </div>
