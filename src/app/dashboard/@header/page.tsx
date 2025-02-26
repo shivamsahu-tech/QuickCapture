@@ -203,32 +203,23 @@ export default function Header() {
                     ref={menubarRef}
                 >
 
-                    {/* for profile image upload */}
-                    <div className="flex items-center gap-5 m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer"
-                    onClick={() => setImageUploaderVisible(true)}
-                    >
-                        <h1 className="font-semibold text-sm">Profile Photo</h1>
-                        <label htmlFor="file-upload">
-                            <FontAwesomeIcon icon={faArrowUpFromBracket} />
-                        </label>                      
-                       
-                    </div>
-
-
-                    <div className="m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600  cursor-pointer flex justify-center items-center"
+                    {/* for change password functionality */}
+                    <div className="m-0.5 p-0.5 rounded-md hover:bg-slate-600  cursor-pointer r"
                          onClick={changePassword}
                     >
                         <h1 className="font-semibold text-sm">{isLoading ? <Spinner size={4} /> : "Change Password"}</h1>
                     </div>
 
-                    <div
-                        className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
-                        onClick={signOut} // Attach signOut directly here
+                    {/* for profile image upload */}
+                    <div className="flex justify-between m-0.5 p-0.5 rounded-md hover:bg-slate-600 cursor-pointer"
+                    onClick={() => setImageUploaderVisible(true)}
                     >
-                        <h1 className="font-semibold text-sm mr-4">{logoutLoading ? <Spinner size={4} /> : "LogOut"}</h1>
-                        <FontAwesomeIcon icon={faRightFromBracket} />
+                        <h1 className="font-semibold text-sm">Profile Photo</h1>
+                        <label htmlFor="file-upload">
+                            <FontAwesomeIcon className="px-1" icon={faArrowUpFromBracket} />
+                        </label>                      
+                       
                     </div>
-                    
 
                     {/* this is for payment purpose */}
                     <div className="m-0.5 py-0.5 pl-1  rounded-md hover:bg-slate-600  cursor-pointer flex  justify-between items-center"
@@ -238,13 +229,12 @@ export default function Header() {
                         <FontAwesomeIcon className="mr-1" icon={faCoffee} />
                     </div>
 
-
                     {/* contact us */}
                     <div
                         className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
                     >
                         <h1 className="font-semibold text-sm mr-4"><a href="/contact" >contact us</a></h1>
-                        <FontAwesomeIcon icon={faIdBadge} />
+                        <FontAwesomeIcon className="mx-1" icon={faIdBadge} />
                     </div>
 
                     {/* term and conditions */}
@@ -253,6 +243,15 @@ export default function Header() {
                     >
                         <h1 className="font-semibold text-sm mr-4"><a href="/term&conds" >Term & Conds.</a></h1>
                         <FontAwesomeIcon icon={faScaleBalanced} />
+                    </div>
+
+                    {/* logout */}
+                    <div
+                        className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
+                        onClick={signOut} // Attach signOut directly here
+                    >
+                        <h1 className="font-semibold text-sm mr-4">{logoutLoading ? <Spinner size={4} /> : "Logout"}</h1>
+                        <FontAwesomeIcon icon={faRightFromBracket} />
                     </div>
                 </div>
             </div>
