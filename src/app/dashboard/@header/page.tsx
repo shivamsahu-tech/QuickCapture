@@ -211,12 +211,12 @@ export default function Header() {
                     </div>
 
                     {/* for profile image upload */}
-                    <div className="flex justify-between m-0.5 p-0.5 rounded-md hover:bg-slate-600 cursor-pointer"
+                    <div className="flex justify-between m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer"
                     onClick={() => setImageUploaderVisible(true)}
                     >
                         <h1 className="font-semibold text-sm">Profile Photo</h1>
                         <label htmlFor="file-upload">
-                            <FontAwesomeIcon className="px-1" icon={faArrowUpFromBracket} />
+                            <FontAwesomeIcon className="px-0.5" icon={faArrowUpFromBracket} />
                         </label>                      
                        
                     </div>
@@ -225,7 +225,7 @@ export default function Header() {
                     <div className="m-0.5 py-0.5 pl-1  rounded-md hover:bg-slate-600  cursor-pointer flex  justify-between items-center"
                          onClick={handlePayment}
                     >
-                        <h1 className="font-semibold text-sm">{paymentLoading ? <Spinner size={4} /> : "buy a coffee"}</h1>
+                        <h1 className="font-semibold text-sm">{paymentLoading ? <Spinner size={4} /> : "Donate a coffee"}</h1>
                         <FontAwesomeIcon className="mr-1" icon={faCoffee} />
                     </div>
 
@@ -233,7 +233,7 @@ export default function Header() {
                     <div
                         className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
                     >
-                        <h1 className="font-semibold text-sm mr-4"><a href="/contact" >contact us</a></h1>
+                        <h1 className="font-semibold text-sm mr-4"><a href="/contact" >Contact Us</a></h1>
                         <FontAwesomeIcon className="mx-1" icon={faIdBadge} />
                     </div>
 
@@ -241,7 +241,7 @@ export default function Header() {
                     <div
                         className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
                     >
-                        <h1 className="font-semibold text-sm mr-4"><a href="/term&conds" >Term & Conds.</a></h1>
+                        <h1 className="font-semibold text-sm mr-4"><a href="/term&conds" >Terms & Conds.</a></h1>
                         <FontAwesomeIcon icon={faScaleBalanced} />
                     </div>
 
