@@ -2,7 +2,7 @@
 import { Spinner } from "@/components/ui/Spinner";
 import { useNote } from "@/context/NoteContext";
 import { useToast } from "@/hooks/use-toast";
-import {  faArrowUpFromBracket, faCoffee, faIdBadge, faMagnifyingGlass, faRightFromBracket, faScaleBalanced } from "@fortawesome/free-solid-svg-icons";
+import {  faArrowUpFromBracket, faCoffee, faIdBadge, faMagnifyingGlass, faRightFromBracket, faRightToBracket, faScaleBalanced } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -204,22 +204,28 @@ export default function Header() {
                 >
 
                     {/* for change password functionality */}
-                    <div className="m-0.5 p-0.5 rounded-md hover:bg-slate-600  cursor-pointer r"
-                         onClick={changePassword}
-                    >
-                        <h1 className="font-semibold text-sm">{isLoading ? <Spinner size={4} /> : "Change Password"}</h1>
-                    </div>
+                    {
+                        !isGuest && 
+                        <div className="m-0.5 p-0.5 rounded-md hover:bg-slate-600  cursor-pointer r"
+                            onClick={changePassword}
+                        >
+                            <h1 className="font-semibold text-sm">{isLoading ? <Spinner size={4} /> : "Change Password"}</h1>
+                        </div>
+                    }
 
                     {/* for profile image upload */}
-                    <div className="flex justify-between m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer"
-                    onClick={() => setImageUploaderVisible(true)}
-                    >
-                        <h1 className="font-semibold text-sm">Profile Photo</h1>
-                        <label htmlFor="file-upload">
-                            <FontAwesomeIcon className="px-0.5" icon={faArrowUpFromBracket} />
-                        </label>                      
-                       
-                    </div>
+                    {
+                        !isGuest &&
+                            <div className="flex justify-between m-0.5 p-0.5 px-1 rounded-md hover:bg-slate-600 cursor-pointer"
+                            onClick={() => setImageUploaderVisible(true)}
+                            >
+                                <h1 className="font-semibold text-sm">Profile Photo</h1>
+                                <label htmlFor="file-upload">
+                                    <FontAwesomeIcon className="px-0.5" icon={faArrowUpFromBracket} />
+                                </label>                      
+                            
+                            </div>
+                    }
 
                     {/* this is for payment purpose */}
                     <div className="m-0.5 py-0.5 pl-1  rounded-md hover:bg-slate-600  cursor-pointer flex  justify-between items-center"
@@ -246,13 +252,24 @@ export default function Header() {
                     </div>
 
                     {/* logout */}
-                    <div
-                        className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
-                        onClick={signOut} // Attach signOut directly here
-                    >
-                        <h1 className="font-semibold text-sm mr-4">{logoutLoading ? <Spinner size={4} /> : "Logout"}</h1>
-                        <FontAwesomeIcon icon={faRightFromBracket} />
-                    </div>
+                    {
+                    !isGuest && <div
+                            className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
+                            onClick={signOut} // Attach signOut directly here
+                        >
+                            <h1 className="font-semibold text-sm mr-4">{logoutLoading ? <Spinner size={4} /> : "Logout"}</h1>
+                            <FontAwesomeIcon icon={faRightFromBracket} />
+                        </div>
+                    }
+
+                    {
+                        isGuest && <div
+                            className="flex justify-between items-center m-0.5 p-0.5 px-1 rounded-md  hover:bg-slate-600 cursor-pointer"
+                        >
+                            <h1 className="font-semibold text-sm mr-4"><a href="/sign-up" >Sign Up</a></h1>
+                            <FontAwesomeIcon icon={faRightToBracket} />
+                        </div>
+                    }
                 </div>
             </div>
         </div>

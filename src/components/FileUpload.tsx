@@ -96,6 +96,7 @@ export default function FileUpload() {
             setImageURL(data.imageUrl);
             toast({
                 title: "File Uploaded Successfully",
+                className: "bg-green-600"
             })
             setImageUploaderVisible(false);
 
